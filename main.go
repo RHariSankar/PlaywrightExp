@@ -19,7 +19,7 @@ func worker(id int, wg *sync.WaitGroup, stopCh <-chan struct{}, tabCount int) {
 	if err != nil {
 		log.Fatalf("could not start playwright: %v", err)
 	}
-	browser, err := pw.Chromium.Launch(playwright.BrowserTypeLaunchOptions{Headless: playwright.Bool(false)})
+	browser, err := pw.Chromium.Launch(playwright.BrowserTypeLaunchOptions{Headless: playwright.Bool(true)})
 	if err != nil {
 		log.Fatalf("could not launch browser: %v", err)
 	}
