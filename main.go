@@ -65,7 +65,7 @@ func main() {
 	signal.Notify(signalCh, os.Interrupt, syscall.SIGTERM)
 
 	// Create a channel to signal the workers to stop
-	stopChs := make([]chan struct{}, 3)
+	stopChs := make([]chan struct{}, numOfBrowsers)
 
 	// Use a WaitGroup to wait for all goroutines to finish
 	var wg sync.WaitGroup
@@ -81,7 +81,7 @@ func main() {
 	go func() {
 		<-signalCh
 		fmt.Println("\nReceived SIGINT. Initiating graceful shutdown...")
-		for i := 0; i < 3; i++ {
+		for i := 0; i < numOfBrowsers; i++ {
 			close(stopChs[i])
 		}
 	}()
